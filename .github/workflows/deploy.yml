@@ -1,0 +1,31 @@
+name: Deploy RAG System
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            if [ ! -d "document-rag-system" ]; then
+              git clone https://github.com/${{ github.repository }}.git document-rag-system
+            fi
+            cd document-rag-system
+            git pull origin master
+            
+            sudo docker-compose down
+            sudo docker-compose up -d --build

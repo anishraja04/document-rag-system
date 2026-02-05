@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  rag_api:
+    build: .
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./faiss_index:/app/faiss_index
+    restart: always
