@@ -19,3 +19,7 @@ A Retrieval-Augmented Generation (RAG) system built with Python, FastAPI, LangCh
 ## Endpoints
 - `POST /ingest`: Upload a text document.
 - `POST /ask`: Ask a question based on ingested context.
+
+
+## Community
+Contributions are always welcome. See CONTRIBUTING.md for details.
